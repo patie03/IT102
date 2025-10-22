@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+</html>
 
+<head>
+
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First html page</title>
+</head>
+<body>
+     <h1>My first wonderful HTML page for my IT102 class!</h1>
+
+     <section id="converter">
+         <p>Choose conversion type and click <strong>Start Conversion</strong>.</p>
+         <p>
+             <label for="choice">Conversion (K = kilometers → miles, M = miles → kilometers): </label>
+             <input id="choice" type="text" maxlength="1" placeholder="K or M" aria-label="conversion choice">
+             <button id="startBtn">Start Conversion</button>
+         </p>
+         <div id="result" role="status" aria-live="polite"></div>
+     </section>
+
+     <script>
+         // Conversion constants
+         const KM_TO_MI = 0.621371;
+
+         const choiceInput = document.getElementById('choice');
+         const startBtn = document.getElementById('startBtn');
+         const resultDiv = document.getElementById('result');
+
+         function formatNumber(n){
+             return Number.parseFloat(n).toFixed(4);
+         }
+
+         startBtn.addEventListener('click', () => {
+             const choice = (choiceInput.value || '').trim().toUpperCase();
+
+             if(choice === 'K'){
+                 // Ask for kilometers value
+                 const kmStr = prompt('Enter kilometers value:');
+                 const km = Number(kmStr);
+                 if(kmStr === null){ // user cancelled
+                     resultDiv.textContent = 'Conversion cancelled.';
+                     return;
+                 }
+                 if(kmStr.trim() === '' || Number.isNaN(km)){
+                     resultDiv.textContent = 'Invalid number for kilometers.';
+                     return;
+                 }
+                 const miles = km * KM_TO_MI;
+                 resultDiv.textContent = `${km} kilometers = ${formatNumber(miles)} miles`;
+
+             } else if(choice === 'M'){
+                 // Ask for miles value
+                 const miStr = prompt('Enter miles value:');
+                 const mi = Number(miStr);
+                 if(miStr === null){
+                     resultDiv.textContent = 'Conversion cancelled.';
+                     return;
+                 }
+                 if(miStr.trim() === '' || Number.isNaN(mi)){
+                     resultDiv.textContent = 'Invalid number for miles.';
+                     return;
+                 }
+                 const kilometers = mi / KM_TO_MI;
+                 resultDiv.textContent = `${mi} miles = ${formatNumber(kilometers)} kilometers`;
+
+             } else {
+                 resultDiv.textContent = "Invalid choice! Please type 'K' or 'M'.";
+             }
+         });
+     </script>
+</body>
+</html>
