@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function get_interviewee_name() {
+        return prompt("what is your name?");
+    }
 
+    function get_interviewee_email_address(){
+        return prompt("what is your email address");
+    }
+    
+    function get_interviewee_start_date(){
+        return prompt("when to start work?");
+    }
+
+    // displays functions
+    document.write("Hi welcome to my website" +"<br>")
+    document.write("Candidate name: " + get_interviewee_name() + "<br>");
+    document.write("Candidate email address: " + get_interviewee_email_address() +"<br>");
+    document.write("Candidate available start date: " + get_interviewee_start_date());
+
+</script>
+</body>
+</html>
