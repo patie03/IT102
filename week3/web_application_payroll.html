@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Inc. Payroll</title>
+    <script>
+        // Calculates gross pay including overtime
+        function calcGrossPay(hours) {
+            const rate = 19.00;
+            if (hours <= 40) return hours * rate;
+            let overtime = hours - 40;
+            return (40 * rate) + (overtime * rate * 1.5);
+        }
 
+        // Calculates Social Security
+        function calcSS(pay) {
+            return pay * 0.062;
+        }
+
+        // Calculates Medicare
+        function calcMedicare(pay) {
+            return pay * 0.0145;
+        }
+
+        // Calculates Withholding tax
+        function calcWithholding(pay, allow) {
+            const allowanceValue = 77.90;
+            let taxable = pay - (allow * allowanceValue);
+            if (taxable < 0) taxable = 0;
+            return taxable * 0.20;
+        }
+
+        // Calculates Net Pay
+        function calcNet(gross, ss, med, wh) {
+            return gross - ss - med - wh;
+        }
+
+        // Main function to show results
+        function main() {
+            const fName = document.forms["payForm"]["first"].value;
+            const lName = document.forms["payForm"]["last"].value;
+            const hours = parseFloat(document.forms["payForm"]["hours"].value);
+            const allow = parseInt(document.forms["payForm"]["allow"].value);
+
+            if (!fName || !lName || isNaN(hours) || isNaN(allow)) {
+                alert("Please fill in all fields correctly.");
+                return;
+            }
+
+            const name = fName + " " + lName;
+            const gross = calcGrossPay(hours);
+            const ss = calcSS(gross);
+            const med = calcMedicare(gross);
+            const wh = calcWithholding(gross, allow);
+            const net = calcNet(gross, ss, med, wh);
+
+            let output = `
+                <b>Employee:</b> ${name}<br>
+                <b>Hours:</b> ${hours}<br>
+                <b>Allowances:</b> ${allow}<br><br>
+                <b>Gross Pay:</b> $${gross.toFixed(2)}<br>
+                <b>Social Security:</b> $${ss.toFixed(2)}<br>
+                <b>Medicare:</b> $${med.toFixed(2)}<br>
+                <b>Withholding:</b> $${wh.toFixed(2)}<br>
+                <hr>
+                <b>Net Pay:</b> $${net.toFixed(2)}
+            `;
+            document.getElementById("payStub").innerHTML = output;
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Ajax Inc. Weekly Payroll</h2>
+    <form name="payForm">
+        First Name: <input type="text" name="first"><br><br>
+        Last Name: <input type="text" name="last"><br><br>
+        Hours Worked: <input type="text" name="hours"><br><br>
+        Allowances: <input type="text" name="allow"><br><br>
+        <input type="button" value="Calculate Pay" onclick="main()">
+    </form>
+
+    <h3>Pay Stub</h3>
+    <p id="payStub"></p>
+</body>
+</html>
