@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Let's Make a Deal</title>
+    </head>
+    <body>
+        <h1>Let's Make a Deal</h1>
+        <hr>
+        <p>Choose a door:</p>
+        <select id="doorSelection">
+            <option value="0">Select a Door</option>
+            <option value="1">Door #1</option>
+            <option value="2">Door #2</option>
+            <option value="3">Door #3</option>
+        </select>
+        <button onclick="doorPrize()">Select</button>
+
+        <p id="prizeMessage">Good Luck!</p>
+
+        <script>
+            //literal object (key:value pairs)
+            const prizes = {
+                1: "a new car!",
+                2: "a vacation!",
+                3: "a mystery box!"
+            };
+            //function to display the selected prize
+            function doorPrize() {
+                const useChoice =
+                    document.getElementById("doorSelection").value;
+                const prizeMessage = document.getElementById("prizeMessage");
+                if (useChoice in prizes) {
+                    prizeMessage.innerHTML =
+                        "Congratulations! You won " + prizes[useChoice];
+                } else {
+                    prizeMessage.innerHTML = "Please select a valid door.";
+                }
+
+
+                
+  
+            }    
+        </script>
+    </body>
+</html> 
 
