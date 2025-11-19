@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Requirements Checker</title>
+</head>
+<body>
 
+<h1>Math Requirements Checker</h1>
+<p>Enter your most recent or highest math course to check if you meet the BAS math requirement.</p>
+
+
+
+
+<form id="mathForm" onsubmit="main(); return false;">
+  <label for="courseInput">Math Course:</label>
+  <input type="text" id="courseInput" name="courseInput" placeholder="e.g., MATH146">
+  <button type="submit">Check Eligibility</button>
+</form>
+
+<div id="result"></div>
+
+
+
+
+<input type="text" id="courseInput">
+<button onclick="main()">Check</button>
+<br><br>
+
+<p id="result"></p>
+
+<script>
+	
+    
+
+var allMathCourses = {
+    MATH097: { qualifies:false, next:"MATH098" },
+    MATH098: { qualifies:false, next:"MATH141" },
+    MATH141: { qualifies:false, next:"MATH142" },
+    MATH142: { qualifies:false, next:"MATH151" },
+    MATH146: { qualifies:true, next:"146" },
+    MATH151: { qualifies:true, next:"MATH152" }
+};
+
+
+function main() {
+    var course = getCourseNumber();
+
+    if (course === "") {
+        document.getElementById("result").innerHTML =
+        "Enter the valid MATH course.";
+        return;
+    }
+
+    var info = checkEligibility(course);
+    displayResults(info, course);
+}
+
+
+function getCourseNumber() {
+    var c = document.getElementById("courseInput").value;
+
+   c = c.toUpperCase().trim();
+
+    if (allMathCourses[c] == undefined || c == "") {
+        return "";
+    }
+
+    return c;
+}
+
+
+function checkEligibility(course) {
+    return allMathCourses[course];
+}
+
+
+function displayResults(info, course) {
+
+    var result = "";
+
+    if (info.qualifies == true) {
+        result = "Your course " + course +
+                 " meets the BAS AD math requirement.";
+    }
+    else {
+        result = "Your course " + course +
+                 " does NOT meet the requirement.<br>" +
+                 "Next math class is: " + info.next;
+    }
+
+    document.getElementById("result").innerHTML = result;
+}
+
+</script>
+
+
+</body>
+</html>
