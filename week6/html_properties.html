@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <body>
@@ -15,6 +16,7 @@
     <br><br>
     <!--Add 2nd Button-->
     <br><br>
+    <button type="submit" onclick = "changeFontSize()">Change Font Size</button>
     <!--Add 3rd Button-->
     <br><br>
     <!--Add 4th Button-->
@@ -25,13 +27,39 @@
 
      function changeTextColor(){
        var textcolor = document.getElementById("row1").style.color;
-       if (textcolor== "puple"){
-         textcolor = "pink";
+       if (textcolor== "green"){
+         textcolor = "blue";
        }else{
-         textcolor = "purple";
+         textcolor = "green";
        }
        document.getElementById("row1").style.color = textcolor;
      }
+
+function changeBorderThickness(){
+  var borderthickness = document.getElementById("myTable").style.borderthickness;
+  if (changeborderthickness=="10"){
+    changeborderthickness = "5";
+  }else{
+changeborderthickness = "10";
+  }
+  document.getElementById("myTable").style.borderthickness = changeborderthickness;
+     }
+
+
+
+
+     function changeFontSize(){
+      var changefontsize = document.getElementById("myTable").style.fontsize;
+      if (changefontsize=="30px"){
+         changefontsize = "15px";
+      }else{
+         changefontsize = "30px";
+      }
+      document.getElementById("myTable").style.fontSize = changefontsize;
+     }
+
+
+
     </script>
   </body>
 </html>
