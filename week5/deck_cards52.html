@@ -1,13 +1,57 @@
-// Initialize an empty array to store a deck of cards
-// Loop until the deck of 52 cards
-       //Use Card Object
-       //Outer Loop Suite
-       //Inner Loop Rank
-// Initialize an empty array to store the hand of cards
-// Initialize a counter variable to keep track of the number of cards in hand
-// Loop until the hand has 3 cards
-// Check if the picked card is not already dealt (not in the hand)
-        // Deal the card to the hand
-        // Mark the card as "dealt" to avoid duplicates
-        // Increment the card counter
-// Output the hand of cards
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Deck of Cards</title>
+  </head>
+  <body>
+    <h1>Deck of Cards</h1>
+    <hr />
+
+
+    <script>
+      
+      function Card(suit, rank) {
+        this.suit = suit;
+        this.rank = rank;
+        this.isDealt = false;
+      }
+
+
+      var deck = [];
+      var suits = ["hearts", "diamonds", "clubs", "spades"];
+      var ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+     
+      for (var i = 0; i < suits.length; i++) {
+        for (var j = 0; j < ranks.length; j++) {
+          var card = new Card(suits[i], ranks[j]);
+          deck.push(card);
+        }
+      }
+
+
+      var hand = [];
+      var cardCount = 0;
+
+      while (cardCount < 3) {
+        var randomIndex = Math.floor(Math.random() * deck.length);
+        var pickedCard = deck[randomIndex];
+
+        if (!pickedCard.isDealt) {
+          hand.push(pickedCard);
+          pickedCard.isDealt = true;
+          cardCount++;
+        }
+      }
+
+
+     
+      document.write("Name of cards:<br>");
+      for (var k = 0; k < hand.length; k++) {
+        document.write(hand[k].rank + " of " + hand[k].suit + "<br>");
+      }
+    </script>
+
+  </body>
+</html>
+
