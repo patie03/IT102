@@ -1,1 +1,60 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Deck of Cards</title>
+</head>
+<body>
+<h1>Deck of Cards</h1>
+<hr />
+
+<script>
+// Card Object Constructor
+function Card(suit, rank) {
+this.suit = suit;
+this.rank = rank;
+this.isDealt = false;
+}
+
+// Initialize deck
+var deck = [];
+var suits = ["hearts", "diamonds", "clubs", "spades"];
+var ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+// Create deck of 52 cards
+for (var i = 0; i < suits.length; i++) {
+for (var j = 0; j < ranks.length; j++) {
+deck.push(new Card(suits[i], ranks[j]));
+}
+}
+
+function shuffleDeck(deck) {
+for (let i = deck.length - 1; i > 0; i--) {
+let j = Math.floor(Math.random() * (i + 1));
+[deck[i], deck[j]] = [deck[j], deck[i]];
+}
+}
+
+// Shuffle the deck
+shuffleDeck(deck);
+
+// Deal first 3 cards (now already randomized)
+var hand = deck.slice(0, 3);
+
+// Output shuffled deck
+document.write("<h3>Shuffled Deck:</h3>");
+deck.forEach(function(card) {
+document.write(card.rank + " of " + card.suit + "<br>");
+});
+
+// Output 3-card hand
+document.write("<hr><h3>Your Hand:</h3>");
+hand.forEach(function(card) {
+document.write(card.rank + " of " + card.suit + "<br>");
+});
+</script>
+
+</body>
+</html>
+
+
