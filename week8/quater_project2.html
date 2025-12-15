@@ -1,1 +1,103 @@
+!DOCTYPE html>
+<html>
+<head>
+    <title>Patience Nia Designs Order Form</title>
+</head>
+<body>
 
+<h2>Patience Nia Designs Order Form</h2>
+
+<form onsubmit="submitOrder(event)">
+
+    <label>Size:</label><br>
+    <input type="text" name="size"><br><br>
+
+    <label>Color:</label><br>
+    <input type="text" name="color"><br><br>
+
+    <label>Type:</label><br>
+    <input type="text" name="type"><br><br>
+
+    <h3>Contact Information</h3>
+
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email"><br><br>
+
+    <label>Phone Number:</label><br>
+    <input type="text" name="phone"><br><br>
+
+    <label>Shipping Method:</label><br>
+    <input type="text" name="shipping"><br><br>
+
+    <button type="submit">Submit Order</button>
+</form>
+
+<script>
+
+    let orders = [];
+
+    function Order(size, color, type, name, email, phone, shipping) {
+        this.size = size;
+        this.color = color;
+        this.type = type;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.shipping = shipping;
+    }
+
+ 
+    function validateForm(size, color, type, name, email, phone) {
+        if (
+            size === "" ||
+            color === "" ||
+            type === "" ||
+            name === "" ||
+            email === "" ||
+            phone === ""
+        ) {
+            alert("Please fill out all required fields.");
+            return false;
+        }
+
+        if (email.indexOf("@") === -1) {
+            alert("Please enter a valid email.");
+            return false;
+        }
+
+        return true;
+    }
+
+   
+    function submitOrder(event) {
+        event.preventDefault();
+
+        let size = document.querySelector('[name="size"]').value;
+        let color = document.querySelector('[name="color"]').value;
+        let type = document.querySelector('[name="type"]').value;
+        let name = document.querySelector('[name="name"]').value;
+        let email = document.querySelector('[name="email"]').value;
+        let phone = document.querySelector('[name="phone"]').value;
+        let shipping = document.querySelector('[name="shipping"]').value;
+
+        if (!validateForm(size, color, type, name, email, phone)) {
+            return;
+        }
+
+        let newOrder = new Order(size, color, type, name, email, phone, shipping);
+        orders.push(newOrder);
+
+        alert("Order submitted successfully!");
+
+        console.log("New Order:", newOrder);
+        console.log("All Orders:", orders);
+
+        document.querySelector("form").reset();
+    }
+</script>
+
+</body>
+</html>
