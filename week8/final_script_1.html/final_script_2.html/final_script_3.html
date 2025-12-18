@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
 
+<script>
+  /* ************* POKER DICE ***************
+
+  Creates 5 dice with A, K, Q, J, 10, 9.
+  Dice all roll.
+  Roll gives results of each of the 5 dice.
+
+  ************* POKER DICE *************** */
+
+  function Die(sides) {
+    this.sides = sides;
+    this.values = [];
+
+    var pokerSide = ["A", "K", "Q", "J", "10", "9"];
+
+    this.poker = function () {
+      for (var i = 0; i < this.sides; i++) {
+        this.values[i] = pokerSide[i];
+      }
+    };
+
+    this.roll = function () {
+      var showing = Math.floor(Math.random() * this.sides);
+      return this.values[showing];
+    };
+  }
+
+  var myDice = [];
+
+  for (var c = 0; c < 5; c++) {
+    myDice[c] = new Die(6);
+    myDice[c].poker();
+  }
+
+  var output = "";
+  for (var k = 0; k < 5; k++) {
+    output += myDice[k].roll() + " ";
+  }
+
+  alert(output);
+</script>
+
+</body>
+</html>
